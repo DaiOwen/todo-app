@@ -36,6 +36,16 @@ public class TodoController {
         return todoService.findByPriority(priority);
     }
 
+    @GetMapping("/category/{category}")
+    public List<Todo> getTodosByCategory(@PathVariable String category) {
+        return todoService.findByCategory(category);
+    }
+
+    @GetMapping("/overdue")
+    public List<Todo> getOverdueTodos() {
+        return todoService.findOverdueTodos();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Todo> getTodoById(@PathVariable Long id) {
         return todoService.findById(id)
@@ -57,6 +67,8 @@ public class TodoController {
                     todo.setDescription(todoDetails.getDescription());
                     todo.setCompleted(todoDetails.isCompleted());
                     todo.setPriority(todoDetails.getPriority());
+                    todo.setDueDate(todoDetails.getDueDate());
+                    todo.setCategory(todoDetails.getCategory());
                     Todo updatedTodo = todoService.save(todo);
                     return ResponseEntity.ok(updatedTodo);
                 })

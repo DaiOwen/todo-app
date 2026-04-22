@@ -24,6 +24,12 @@ public class Todo {
     @Column(nullable = false)
     private String priority = "MEDIUM";
     
+    // 截止日期
+    private LocalDateTime dueDate;
+    
+    // 分类/标签
+    private String category;
+    
     private LocalDateTime createdAt;
     
     private LocalDateTime updatedAt;

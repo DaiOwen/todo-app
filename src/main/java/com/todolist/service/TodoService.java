@@ -5,6 +5,7 @@ import com.todolist.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,15 +20,23 @@ public class TodoService {
     }
 
     public List<Todo> findAll() {
-        return todoRepository.findAllByOrderByPriorityDescCreatedAtAsc();
+        return todoRepository.findAllByOrderByPriorityDescDueDateAscCreatedAtAsc();
     }
 
     public List<Todo> findByCompleted(boolean completed) {
-        return todoRepository.findByCompletedOrderByPriorityDescCreatedAtAsc(completed);
+        return todoRepository.findByCompletedOrderByPriorityDescDueDateAscCreatedAtAsc(completed);
     }
 
     public List<Todo> findByPriority(String priority) {
         return todoRepository.findByPriority(priority);
+    }
+
+    public List<Todo> findByCategory(String category) {
+        return todoRepository.findByCategory(category);
+    }
+
+    public List<Todo> findOverdueTodos() {
+        return todoRepository.findByDueDateBeforeAndCompletedFalse(LocalDateTime.now());
     }
 
     public Optional<Todo> findById(Long id) {
