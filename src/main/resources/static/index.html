@@ -33,6 +33,23 @@
                         class="input input-description"
                     ></textarea>
                 </div>
+                <div class="form-group">
+                    <label class="priority-label">优先级：</label>
+                    <div class="priority-select">
+                        <label class="priority-option">
+                            <input type="radio" name="priority" value="LOW" checked>
+                            <span class="priority-badge priority-low">低</span>
+                        </label>
+                        <label class="priority-option">
+                            <input type="radio" name="priority" value="MEDIUM">
+                            <span class="priority-badge priority-medium">中</span>
+                        </label>
+                        <label class="priority-option">
+                            <input type="radio" name="priority" value="HIGH">
+                            <span class="priority-badge priority-high">高</span>
+                        </label>
+                    </div>
+                </div>
                 <button id="addButton" class="btn btn-primary">
                     添加任务
                 </button>
@@ -67,7 +84,10 @@
             <div class="todo-content">
                 <div class="todo-header">
                     <h3 class="todo-title"></h3>
-                    <span class="todo-status"></span>
+                    <div class="todo-badges">
+                        <span class="priority-badge"></span>
+                        <span class="todo-status"></span>
+                    </div>
                 </div>
                 <p class="todo-description"></p>
                 <div class="todo-footer">

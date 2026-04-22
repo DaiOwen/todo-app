@@ -19,11 +19,15 @@ public class TodoService {
     }
 
     public List<Todo> findAll() {
-        return todoRepository.findAll();
+        return todoRepository.findAllByOrderByPriorityDescCreatedAtAsc();
     }
 
     public List<Todo> findByCompleted(boolean completed) {
-        return todoRepository.findByCompleted(completed);
+        return todoRepository.findByCompletedOrderByPriorityDescCreatedAtAsc(completed);
+    }
+
+    public List<Todo> findByPriority(String priority) {
+        return todoRepository.findByPriority(priority);
     }
 
     public Optional<Todo> findById(Long id) {

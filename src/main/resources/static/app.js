@@ -22,11 +22,12 @@ async function fetchTodos() {
     }
 }
 
-async function createTodo(title, description) {
+async function createTodo(title, description, priority) {
     const todo = {
         title,
         description: description || '',
-        completed: false
+        completed: false,
+        priority: priority || 'MEDIUM'
     };
 
     try {
@@ -84,6 +85,7 @@ function createTodoElement(todo) {
     const clone = document.importNode(template.content, true);
     const itemEl = clone.querySelector('.todo-item');
     itemEl.dataset.id = todo.id;
+    itemEl.classList.add(`priority-${todo.priority?.toLowerCase() || 'medium'}`);
 
     if (todo.completed) {
         itemEl.classList.add('completed');
@@ -94,6 +96,16 @@ function createTodoElement(todo) {
 
     const descEl = clone.querySelector('.todo-description');
     descEl.textContent = todo.description;
+
+    // Priority badge
+    const priorityBadge = clone.querySelector('.priority-badge');
+    const priority = todo.priority || 'MEDIUM';
+    priorityBadge.textContent = {
+        'LOW': '低',
+        'MEDIUM': '中',
+        'HIGH': '高'
+    }[priority];
+    priorityBadge.classList.add(`priority-${priority.toLowerCase()}`);
 
     const statusEl = clone.querySelector('.todo-status');
     statusEl.textContent = todo.completed ? '已完成' : '进行中';
@@ -147,16 +159,18 @@ function updateCount() {
 addButton.addEventListener('click', async () => {
     const title = todoTitleInput.value.trim();
     const description = todoDescriptionInput.value.trim();
+    const priority = document.querySelector('input[name="priority"]:checked').value;
 
     if (!title) {
         alert('请输入任务标题');
         return;
     }
 
-    const success = await createTodo(title, description);
+    const success = await createTodo(title, description, priority);
     if (success) {
         todoTitleInput.value = '';
         todoDescriptionInput.value = '';
+        document.querySelector('input[name="priority"][value="MEDIUM"]').checked = true;
         todoTitleInput.focus();
     }
 });

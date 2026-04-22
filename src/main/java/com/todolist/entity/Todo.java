@@ -20,6 +20,10 @@ public class Todo {
     
     private boolean completed = false;
     
+    // 优先级: LOW, MEDIUM, HIGH
+    @Column(nullable = false)
+    private String priority = "MEDIUM";
+    
     private LocalDateTime createdAt;
     
     private LocalDateTime updatedAt;

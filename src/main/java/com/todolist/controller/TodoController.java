@@ -31,6 +31,11 @@ public class TodoController {
         return todoService.findByCompleted(completed);
     }
 
+    @GetMapping("/priority/{priority}")
+    public List<Todo> getTodosByPriority(@PathVariable String priority) {
+        return todoService.findByPriority(priority);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Todo> getTodoById(@PathVariable Long id) {
         return todoService.findById(id)
@@ -51,6 +56,7 @@ public class TodoController {
                     todo.setTitle(todoDetails.getTitle());
                     todo.setDescription(todoDetails.getDescription());
                     todo.setCompleted(todoDetails.isCompleted());
+                    todo.setPriority(todoDetails.getPriority());
                     Todo updatedTodo = todoService.save(todo);
                     return ResponseEntity.ok(updatedTodo);
                 })
