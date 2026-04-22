@@ -7,6 +7,11 @@
 - ✅ 任务增删改查
 - ✅ 任务状态切换（完成/未完成）
 - ✅ 按状态筛选（全部/进行中/已完成）
+- ✅ 任务优先级（高/中/低）不同颜色标记，自动排序
+- ✅ 截止日期支持，过期高亮提醒
+- ✅ 任务分类/标签，支持按分类筛选
+- ✅ 关键词搜索（标题/描述/分类）
+- ✅ 批量操作（标记全部完成、删除全部已完成）
 - ✅ 任务描述支持
 - ✅ 创建时间记录
 - ✅ 响应式设计，支持手机和桌面
@@ -76,6 +81,9 @@ todo-app/
 |------|------|------|
 | GET | `/api/todos` | 获取所有任务 |
 | GET | `/api/todos/completed/{completed}` | 按状态筛选 |
+| GET | `/api/todos/priority/{priority}` | 按优先级筛选 |
+| GET | `/api/todos/category/{category}` | 按分类筛选 |
+| GET | `/api/todos/overdue` | 获取过期任务 |
 | GET | `/api/todos/{id}` | 获取单个任务 |
 | POST | `/api/todos` | 创建任务 |
 | PUT | `/api/todos/{id}` | 更新任务 |
