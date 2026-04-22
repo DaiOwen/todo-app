@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - 任务管理</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Todo List</h1>
+            <p class="subtitle">保持专注，完成每一天</p>
+        </header>
+
+        <main class="main">
+            <div class="add-todo-card">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="todoTitle" 
+                        placeholder="输入新任务..." 
+                        class="input input-title"
+                    >
+                </div>
+                <div class="form-group">
+                    <textarea 
+                        id="todoDescription" 
+                        placeholder="描述（可选）" 
+                        class="input input-description"
+                    ></textarea>
+                </div>
+                <button id="addButton" class="btn btn-primary">
+                    添加任务
+                </button>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="active">进行中</button>
+                <button class="filter-btn" data-filter="completed">已完成</button>
+            </div>
+
+            <div id="todoList" class="todo-list"></div>
+
+            <div id="emptyState" class="empty-state">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <p>暂无任务，添加一个开始吧！</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Spring Boot + Vanilla JavaScript • <span id="todoCount">0</span> 个任务</p>
+        </footer>
+    </div>
+
+    <template id="todoItemTemplate">
+        <div class="todo-item" data-id="">
+            <div class="todo-content">
+                <div class="todo-header">
+                    <h3 class="todo-title"></h3>
+                    <span class="todo-status"></span>
+                </div>
+                <p class="todo-description"></p>
+                <div class="todo-footer">
+                    <small class="todo-date"></small>
+                </div>
+            </div>
+            <div class="todo-actions">
+                <button class="btn-icon btn-toggle" title="切换状态">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </button>
+                <button class="btn-icon btn-delete" title="删除">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
