@@ -14,6 +14,9 @@
         <header class="header">
             <h1 class="title">Todo List</h1>
             <p class="subtitle">保持专注，完成每一天</p>
+            <button id="themeToggle" class="theme-toggle" title="切换浅色/深色主题">
+                <span class="theme-icon">🌙</span>
+            </button>
         </header>
 
         <main class="main">
@@ -92,7 +95,50 @@
                 <button class="filter-btn" data-filter="completed">已完成</button>
             </div>
 
+            <div class="display-mode-tabs">
+                <div class="filter-label">显示模式：</div>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="list">列表</button>
+                    <button class="mode-btn" data-mode="group">按日期分组</button>
+                </div>
+            </div>
+
+            <!-- 统计面板 -->
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">总任务</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statActive">0</div>
+                    <div class="stat-label">进行中</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statCompleted">0</div>
+                    <div class="stat-label">已完成</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statToday">0</div>
+                    <div class="stat-label">今日完成</div>
+                </div>
+            </div>
+
+            <!-- 进度条 -->
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>完成进度</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- 列表模式：普通列表 -->
             <div id="todoList" class="todo-list"></div>
+
+            <!-- 分组模式：按日期分组 -->
+            <div id="groupedTodoList" class="grouped-list"></div>
 
             <div id="emptyState" class="empty-state">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
@@ -120,7 +166,7 @@
     </div>
 
     <template id="todoItemTemplate">
-        <div class="todo-item" data-id="">
+        <div class="todo-item" data-id="" draggable="true">
             <div class="todo-content">
                 <div class="todo-header">
                     <h3 class="todo-title"></h3>

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Todo List Application - Maven 项目配置文件
+  这是一个基于 Spring Boot 的全栈待办事项管理应用
+  Java 版本: 21
+  Spring Boot 版本: 3.2.0
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <!-- Maven 模型版本 -->
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- 项目基本信息 -->
   <groupId>com.todolist</groupId>
   <artifactId>todo-app</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
   <name>Todo List Application</name>
 
+  <!-- Spring Boot 父依赖，提供默认配置和依赖管理 -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -17,35 +26,43 @@
     <relativePath/>
   </parent>
 
+  <!-- 项目配置属性 -->
   <properties>
+    <!-- 使用 Java 21 版本 -->
     <java.version>21</java.version>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
   </properties>
 
+  <!-- 项目依赖 -->
   <dependencies>
+    <!-- Spring Boot Web 依赖，提供Spring MVC和嵌入式Tomcat -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <!-- Spring Boot Data JPA 依赖，提供ORM和数据库操作 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
+    <!-- H2 嵌入式数据库，开发和测试使用，数据存储在本地文件 -->
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <scope>runtime</scope>
     </dependency>
 
+    <!-- Lombok 注解处理器，简化Java代码（自动生成getter/setter/构造函数等） -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
 
+    <!-- Spring Boot 测试依赖，包含JUnit、AssertJ、Mockito等测试工具 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -53,8 +70,10 @@
     </dependency>
   </dependencies>
 
+  <!-- 构建配置 -->
   <build>
     <plugins>
+      <!-- Spring Boot Maven 插件，打包可执行jar，支持运行命令: mvn spring-boot:run -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

@@ -1,62 +1,100 @@
+/**
+ * Todo List 前端样式表
+ * 使用现代CSS变量，实现响应式设计，支持移动端
+ * 配色方案：紫色渐变背景，现代化浅色卡片
+ */
+
+/* CSS 变量定义 - 全局颜色和样式常量，方便统一修改 
+   默认是浅色主题，深色主题通过 body.dark-theme 覆盖这些变量 */
 :root {
-    --color-primary: #2563eb;
-    --color-primary-dark: #1d4ed8;
-    --color-secondary: #64748b;
-    --color-background: #f8fafc;
-    --color-surface: #ffffff;
-    --color-text: #0f172a;
-    --color-text-muted: #64748b;
-    --color-border: #e2e8f0;
-    --color-success: #10b981;
-    --color-danger: #ef4444;
+    --color-primary: #2563eb;          /* 主色：蓝色，用于按钮和高亮 */
+    --color-primary-dark: #1d4ed8;      /* 主色深色，用于悬停效果 */
+    --color-secondary: #64748b;        /* 次要色：灰色，用于次要按钮 */
+    --color-background: #f8fafc;       /* 页面背景色 */
+    --color-surface: #ffffff;          /* 卡片/表面背景色 */
+    --color-text: #0f172a;             /* 主要文字颜色 */
+    --color-text-muted: #64748b;       /* 次要文字颜色（浅色） */
+    --color-border: #e2e8f0;           /* 边框颜色 */
+    --color-success: #10b981;          /* 成功绿色，用于已完成状态 */
+    --color-danger: #ef4444;           /* 危险红色，用于删除和过期 */
+    /* 阴影层级定义，从浅到深 */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --radius: 12px;
-    --transition: all 0.2s ease;
+    --radius: 12px;                     /* 圆角大小 */
+    --transition: all 0.2s ease;       /* 默认过渡动画 */
 }
 
+/* 深色主题变量覆盖 */
+body.dark-theme {
+    --color-primary: #60a5fa;          /* 主色调亮，在深色背景更明显 */
+    --color-primary-dark: #3b82f6;      /* 主色深色 */
+    --color-secondary: #94a3b8;        /* 次要色调亮 */
+    --color-background: #0f172a;       /* 页面背景：深蓝色近黑 */
+    --color-surface: #1e293b;           /* 卡片背景：稍浅的蓝色 */
+    --color-text: #f1f5f9;             /* 主要文字：浅色 */
+    --color-text-muted: #cbd5e1;       /* 次要文字：中灰色 */
+    --color-border: #334155;           /* 边框颜色：深色边框 */
+    --color-success: #34d399;          /* 成功绿色调亮 */
+    --color-danger: #f87171;           /* 危险红色调亮 */
+    /* 阴影在深色背景需要弱化 */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* 全局重置 - 清除浏览器默认边距和盒模型 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* 页面整体样式 */
 body {
+    /* 使用Inter字体，从Google Fonts引入 */
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    /* 紫色渐变背景 */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 最小高度占满视口 */
     min-height: 100vh;
     color: var(--color-text);
     line-height: 1.6;
+    /* 上下内边距2rem，左右1rem，适配移动端 */
     padding: 2rem 1rem;
 }
 
+/* 容器 - 限制最大宽度，居中对齐 */
 .container {
     max-width: 768px;
     margin: 0 auto;
 }
 
+/* 头部区域 - 标题和副标题 */
 .header {
     text-align: center;
     margin-bottom: 2.5rem;
-    color: white;
+    color: white;  /* 在渐变背景上使用白色文字 */
 }
 
+/* 主标题 - 使用Playfair Display衬线字体增加优雅感 */
 .title {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);  /* 文字阴影增加可读性 */
 }
 
+/* 副标题 */
 .subtitle {
     font-size: 1.125rem;
     opacity: 0.95;
     font-weight: 300;
 }
 
+/* 主内容区域 - 浅色背景卡片 */
 .main {
     background: var(--color-background);
     border-radius: var(--radius);
@@ -64,6 +102,7 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
+/* 添加任务表单卡片 */
 .add-todo-card {
     background: var(--color-surface);
     padding: 1.5rem;
@@ -72,10 +111,12 @@ body {
     margin-bottom: 2rem;
 }
 
+/* 表单项组 - 底部间距 */
 .form-group {
     margin-bottom: 1rem;
 }
 
+/* 通用输入框样式 */
 .input {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -87,30 +128,36 @@ body {
     background: var(--color-surface);
 }
 
+/* 输入框聚焦状态 - 高亮边框和阴影 */
 .input:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+/* 标题输入框 - 字号稍大 */
 .input-title {
     font-size: 1.125rem;
 }
 
+/* 描述输入框 - 最小高度80px，允许垂直调整大小 */
 .input-description {
     min-height: 80px;
     resize: vertical;
 }
 
+/* 日期输入框 - 限制最大宽度 */
 .input-date {
     max-width: 200px;
 }
 
+/* 分类输入框 - 限制最大宽度 */
 .input-category {
     max-width: 300px;
 }
 
-/* Priority Selection */
+/* ========== 优先级选择 ========== */
+/* 标签文字 */
 .priority-label {
     display: block;
     font-size: 0.875rem;
@@ -119,28 +166,33 @@ body {
     font-weight: 500;
 }
 
+/* 优先级选择容器 */
 .priority-select {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.5rem;  /* 选项之间间距 */
 }
 
+/* 优先级选项 */
 .priority-option {
-    flex: 1;
+    flex: 1;  /* 三等分宽度 */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* 隐藏原生单选框 */
 .priority-option input {
     display: none;
 }
 
+/* 选中状态的优先级标签 - 添加外边框高亮 */
 .priority-option input:checked + .priority-badge {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
 
+/* 优先级标签基础样式 */
 .priority-badge {
     font-size: 0.875rem;
     padding: 0.375rem 0.75rem;
@@ -151,28 +203,32 @@ body {
     transition: var(--transition);
 }
 
+/* 低优先级 - 蓝色 */
 .priority-low {
     background: #dbeafe;
     color: #1d4ed8;
 }
 
+/* 中优先级 - 黄色 */
 .priority-medium {
     background: #fef3c7;
     color: #d97706;
 }
 
+/* 高优先级 - 红色 */
 .priority-high {
     background: #fee2e2;
     color: #dc2626;
 }
 
-/* Priority Badge in Todo Item */
+/* ========== 任务项中的优先级和分类标签 ========== */
 .todo-badges {
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
 
+/* 根据优先级给任务项左侧边框染色 */
 .todo-item.priority-high {
     border-left-color: #dc2626;
 }
@@ -185,27 +241,34 @@ body {
     border-left-color: #1d4ed8;
 }
 
+/* 过期任务 - 浅红背景提示 */
 .todo-item.overdue {
     background: #fef2f2;
 }
 
+/* 截止日期文字样式 */
 .todo-due-date {
     font-size: 0.75rem;
     font-weight: 500;
 }
 
+/* 过期文字 - 红色 */
 .todo-due-date.overdue {
     color: #dc2626;
 }
 
+/* 今天截止 - 黄色 */
 .todo-due-date.today {
     color: #d97706;
 }
 
+/* 默认截止日期文字 - 灰色 */
 .todo-due-date {
     color: var(--color-text-muted);
 }
 
+/* ========== 按钮样式 ========== */
+/* 通用按钮基础样式 */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -220,6 +283,7 @@ body {
     font-family: inherit;
 }
 
+/* 主按钮 - 添加任务使用 */
 .btn-primary {
     background: var(--color-primary);
     color: white;
@@ -228,14 +292,15 @@ body {
 
 .btn-primary:hover {
     background: var(--color-primary-dark);
-    transform: translateY(-1px);
+    transform: translateY(-1px);  /* 上浮效果 */
     box-shadow: var(--shadow-md);
 }
 
 .btn-primary:active {
-    transform: translateY(0);
+    transform: translateY(0);  /* 点击下沉 */
 }
 
+/* ========== 筛选标签 ========== */
 .filter-tabs {
     display: flex;
     gap: 0.5rem;
@@ -246,8 +311,9 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+/* 筛选按钮 */
 .filter-btn {
-    flex: 1;
+    flex: 1;  /* 三等分宽度 */
     padding: 0.625rem 1rem;
     border: none;
     background: transparent;
@@ -264,11 +330,13 @@ body {
     color: var(--color-text);
 }
 
+/* 当前选中的筛选按钮 - 主色背景白色文字 */
 .filter-btn.active {
     background: var(--color-primary);
     color: white;
 }
 
+/* 额外筛选区域（分类筛选） */
 .extra-filters {
     display: flex;
     align-items: center;
@@ -278,9 +346,10 @@ body {
     padding: 0.75rem 1rem;
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-    flex-wrap: wrap;
+    flex-wrap: wrap;  /* 允许换行，适配小屏幕 */
 }
 
+/* 筛选标签文字 */
 .filter-label {
     font-size: 0.875rem;
     font-weight: 500;
@@ -288,6 +357,7 @@ body {
     white-space: nowrap;
 }
 
+/* 分类筛选按钮容器 */
 .category-filters {
     display: flex;
     flex-wrap: wrap;
@@ -295,6 +365,7 @@ body {
     flex: 1;
 }
 
+/* 分类筛选按钮 */
 .category-filter-btn {
     padding: 0.375rem 0.75rem;
     border: 1px solid var(--color-border);
@@ -312,12 +383,14 @@ body {
     color: var(--color-text);
 }
 
+/* 当前选中的分类按钮 */
 .category-filter-btn.active {
     background: var(--color-primary);
     border-color: var(--color-primary);
     color: white;
 }
 
+/* 清除筛选按钮特殊样式 */
 .category-filter-btn.clear {
     border-color: var(--color-danger);
     color: var(--color-danger);
@@ -328,9 +401,16 @@ body {
     color: white;
 }
 
-/* Search Box */
+/* 搜索框区域 */
+.search-box {
+    margin-bottom: 1rem;
+}
 
-/* Batch Actions */
+.search-input {
+    font-size: 1rem;
+}
+
+/* ========== 批量操作按钮 ========== */
 .batch-actions {
     display: flex;
     gap: 1rem;
@@ -341,10 +421,12 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+/* 批量按钮等分宽度 */
 .batch-actions .btn {
     flex: 1;
 }
 
+/* 次要按钮 - 灰色背景 */
 .btn-secondary {
     background: var(--color-secondary);
     color: white;
@@ -356,6 +438,7 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+/* 危险按钮 - 红色背景（删除使用） */
 .btn-danger {
     background: var(--color-danger);
     color: white;
@@ -366,15 +449,8 @@ body {
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
 }
-.search-box {
-    margin-bottom: 1rem;
-}
 
-.search-input {
-    font-size: 1rem;
-}
-
-/* Category Badge */
+/* 分类标签 - 紫色背景 */
 .category-badge {
     font-size: 0.75rem;
     padding: 0.125rem 0.5rem;
@@ -384,12 +460,14 @@ body {
     font-weight: 500;
 }
 
+/* ========== 任务列表 ========== */
 .todo-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1rem;  /* 任务项之间间距 */
 }
 
+/* 单个任务项 */
 .todo-item {
     background: var(--color-surface);
     border-radius: var(--radius);
@@ -399,29 +477,34 @@ body {
     gap: 1rem;
     align-items: flex-start;
     transition: var(--transition);
-    border-left: 4px solid transparent;
+    border-left: 4px solid transparent;  /* 左侧边用于优先级颜色标识 */
 }
 
+/* 悬停效果 - 阴影加深，上浮2px */
 .todo-item:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
 
+/* 已完成任务 - 降低透明度，左侧边框绿色 */
 .todo-item.completed {
     opacity: 0.7;
     border-left-color: var(--color-success);
 }
 
+/* 已完成任务标题 - 添加删除线，颜色变灰 */
 .todo-item.completed .todo-title {
     text-decoration: line-through;
     color: var(--color-text-muted);
 }
 
+/* 任务内容区域 - 占据剩余空间 */
 .todo-content {
     flex: 1;
-    min-width: 0;
+    min-width: 0;  /* 允许收缩 */
 }
 
+/* 任务头部 - 标题和标签行 */
 .todo-header {
     display: flex;
     align-items: center;
@@ -430,58 +513,68 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* 任务标题 */
 .todo-title {
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--color-text);
 }
 
+/* 任务状态标签 */
 .todo-status {
     font-size: 0.75rem;
     padding: 0.25rem 0.625rem;
-    border-radius: 9999px;
+    border-radius: 9999px;  /* 全圆角 */
     font-weight: 500;
 }
 
+/* 进行中状态 - 蓝色 */
 .todo-status.active {
     background: #dbeafe;
     color: #1d4ed8;
 }
 
+/* 已完成状态 - 绿色 */
 .todo-status.completed {
     background: #d1fae5;
     color: #065f46;
 }
 
+/* 任务描述 */
 .todo-description {
     color: var(--color-text-muted);
     font-size: 0.875rem;
     margin-bottom: 0.75rem;
-    white-space: pre-wrap;
-    word-break: break-word;
+    white-space: pre-wrap;  /* 保留换行 */
+    word-break: break-word;  /* 长单词自动换行 */
 }
 
+/* 描述为空时隐藏 */
 .todo-description:empty {
     display: none;
 }
 
+/* 任务底部 - 截止日期和创建时间 */
 .todo-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* 创建时间文字 */
 .todo-date {
     color: var(--color-text-muted);
     font-size: 0.75rem;
 }
 
+/* 操作按钮列 */
 .todo-actions {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
+/* 图标按钮（切换/删除） */
 .btn-icon {
     width: 36px;
     height: 36px;
@@ -500,20 +593,34 @@ body {
     background: var(--color-background);
 }
 
+/* 切换按钮悬停 - 绿色 */
 .btn-toggle:hover {
     color: var(--color-success);
 }
 
+/* 删除按钮悬停 - 红色浅背景 */
 .btn-delete:hover {
     color: var(--color-danger);
     background: #fef2f2;
 }
 
+/* ========== 拖拽排序 ========== */
+.todo-item.dragging {
+    opacity: 0.5;
+    background: var(--color-background);
+    border: 2px dashed var(--color-primary);
+}
+
+.todo-item.drag-over {
+    border-top: 3px solid var(--color-primary);
+}
+
+/* 空状态 - 没有任务时显示 */
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
     color: var(--color-text-muted);
-    display: none;
+    display: none;  /* 默认隐藏，有需要时添加show类显示 */
 }
 
 .empty-state svg {
@@ -521,10 +628,202 @@ body {
     opacity: 0.5;
 }
 
+/* 显示空状态 */
 .empty-state.show {
     display: block;
 }
 
+/* ========== 主题切换按钮 ========== */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 24px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.header {
+    position: relative;  /* 为了主题按钮绝对定位 */
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: white;
+}
+
+/* ========== 统计面板 ========== */
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    background: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+/* ========== 显示模式切换 ========== */
+.display-mode-tabs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    background: var(--color-surface);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mode-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.mode-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.mode-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+/* ========== 进度条 ========== */
+.progress-container {
+    margin-bottom: 1.5rem;
+    background: var(--color-surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.progress-label span:first-child {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.progress-label span:last-child {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--color-background);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-success));
+    border-radius: 999px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* ========== 分组显示 ========== */
+.grouped-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.date-group {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.date-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.date-group-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.date-group-count {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.date-group-todos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.date-group-todos .todo-item {
+    margin: 0;
+}
+
+/* ========== 页脚 ========== */
 .footer {
     text-align: center;
     margin-top: 2rem;
@@ -536,20 +835,25 @@ body {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+/* ========== 响应式适配 - 移动端 ========== */
 @media (max-width: 640px) {
     .title {
-        font-size: 2.5rem;
+        font-size: 2.5rem;  /* 标题缩小 */
     }
 
     .main {
-        padding: 1.25rem;
+        padding: 1.25rem;  /* 内边距缩小 */
     }
 
     .todo-item {
-        padding: 1rem;
+        padding: 1rem;  /* 任务项内边距缩小 */
     }
 
     .todo-actions {
-        flex-direction: row;
+        flex-direction: row;  /* 操作按钮从竖排改为横排 */
+    }
+
+    .stats-panel {
+        grid-template-columns: repeat(2, 1fr);  /* 移动端统计面板改为2列 */
     }
 }
